@@ -1,0 +1,13 @@
+plugins {
+    id 'net.minecrell.gitpatcher' version '0.8.1'
+}
+
+patches {
+    submodule = 'CanaryLib'
+    target = file('NeptuneLib')
+    patches = file('CanaryLib-Patches')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}

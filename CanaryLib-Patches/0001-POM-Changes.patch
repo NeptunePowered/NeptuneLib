@@ -1,0 +1,56 @@
+From d8dbac6bc37a0f2a49fe10faef9caa2a3e1775ae Mon Sep 17 00:00:00 2001
+From: Jamie Mansfield <dev@jamierocks.uk>
+Date: Wed, 31 Aug 2016 22:03:14 +0100
+Subject: [PATCH] POM Changes
+
+
+diff --git a/pom.xml b/pom.xml
+index 67c8b0c..e27c8a0 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -6,17 +6,17 @@
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+-    <groupId>net.canarymod</groupId>
+-    <artifactId>CanaryLib</artifactId>
++    <groupId>org.neptunepowered</groupId>
++    <artifactId>NeptuneLib</artifactId>
+     <packaging>jar</packaging>
+     <version>1.2.1-SNAPSHOT</version>
+-    <name>CanaryLib</name>
+-    <url>http://www.canarymod.net</url>
+-    <inceptionYear>2012</inceptionYear>
++    <name>NeptuneLib</name>
++    <url>https://www.neptunepowered.org/</url>
++    <inceptionYear>2016</inceptionYear>
+ 
+     <organization>
+-        <name>CanaryMod Team</name>
+-        <url>http://canarymod.net</url>
++        <name>NeptunePowered</name>
++        <url>https://www.neptunepowered.org/</url>
+     </organization>
+ 
+     <properties>
+@@ -82,13 +82,13 @@
+     </licenses>
+ 
+     <scm>
+-        <connection>scm:git:git://github.com/CanaryModTeam/CanaryLib.git</connection>
+-        <url>https://github.com/CanaryModTeam/CanaryLib</url>
+-        <developerConnection>scm:git:git@github.com:CanaryModTeam/CanaryLib.git</developerConnection>
++        <connection>scm:git:git://github.com/NeptunePowered/NeptuneLib.git</connection>
++        <url>https://github.com/NeptunePowered/NeptuneLib</url>
++        <developerConnection>scm:git:git@github.com:NeptunePowered/NeptuneLib.git</developerConnection>
+     </scm>
+ 
+     <issueManagement>
+-        <url>https://github.com/CanaryModTeam/CanaryLib/issues</url>
++        <url>https://github.com/NeptunePowered/NeptuneLib/issues</url>
+         <system>GitHub</system>
+     </issueManagement>
+ 
+-- 
+2.8.2
+
