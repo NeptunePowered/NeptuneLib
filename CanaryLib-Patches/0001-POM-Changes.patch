@@ -1,11 +1,11 @@
-From d8dbac6bc37a0f2a49fe10faef9caa2a3e1775ae Mon Sep 17 00:00:00 2001
+From de9e6f0858ef5c52c5b994659290f7b221b96b31 Mon Sep 17 00:00:00 2001
 From: Jamie Mansfield <dev@jamierocks.uk>
 Date: Wed, 31 Aug 2016 22:03:14 +0100
 Subject: [PATCH] POM Changes
 
 
 diff --git a/pom.xml b/pom.xml
-index 67c8b0c..e27c8a0 100644
+index 67c8b0c..7aa7c05 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -6,17 +6,17 @@
@@ -33,7 +33,7 @@ index 67c8b0c..e27c8a0 100644
      </organization>
  
      <properties>
-@@ -82,13 +82,13 @@
+@@ -82,31 +82,31 @@
      </licenses>
  
      <scm>
@@ -51,6 +51,45 @@ index 67c8b0c..e27c8a0 100644
          <system>GitHub</system>
      </issueManagement>
  
+     <ciManagement>
+         <system>Jenkins</system>
+-        <url>http://ci.visualillusionsent.net/job/CanaryLib/</url>
++        <url>http://ci.lexteam.xyz/job/Canary/job/NeptuneLib/</url>
+     </ciManagement>
+     
+     <distributionManagement>
+         <repository>
+-            <id>vi-repo</id>
+-            <name>Visual Illusions Repository</name>
+-            <url>http://repo.visualillusionsent.net/repository/internal/</url>
++            <id>lex-releases</id>
++            <name>Lexteam Maven Repository</name>
++            <url>file://${env.MAVEN_RELEASES}</url>
+         </repository>
+         <snapshotRepository>
+-            <id>vi-repo</id>
+-            <name>Visual Illusions Repository</name>
+-            <url>http://repo.visualillusionsent.net/repository/snapshots/</url>
++            <id>lex-snapshots</id>
++            <name>Lexteam Maven Repository</name>
++            <url>file://${env.MAVEN_SNAPSHOTS}</url>
+         </snapshotRepository>
+     </distributionManagement>
+     <repositories>
+@@ -297,6 +297,13 @@
+                 </configuration>
+             </plugin>
+         </plugins>
++        <extensions>
++            <extension>
++                <groupId>org.apache.maven.wagon</groupId>
++                <artifactId>wagon-file</artifactId>
++                <version>2.7</version>
++            </extension>
++        </extensions>
+     </build>
+ 
+     <profiles>
 -- 
 2.8.2
 
