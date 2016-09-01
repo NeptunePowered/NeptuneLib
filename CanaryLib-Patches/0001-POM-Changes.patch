@@ -1,11 +1,11 @@
-From de9e6f0858ef5c52c5b994659290f7b221b96b31 Mon Sep 17 00:00:00 2001
+From a4f1d43029d8ba1a0fc71df68e6859329499e533 Mon Sep 17 00:00:00 2001
 From: Jamie Mansfield <dev@jamierocks.uk>
 Date: Wed, 31 Aug 2016 22:03:14 +0100
 Subject: [PATCH] POM Changes
 
 
 diff --git a/pom.xml b/pom.xml
-index 67c8b0c..7aa7c05 100644
+index 67c8b0c..1b20b7a 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -6,17 +6,17 @@
@@ -90,6 +90,16 @@ index 67c8b0c..7aa7c05 100644
      </build>
  
      <profiles>
+@@ -348,6 +355,9 @@
+                                 <goals>
+                                     <goal>jar</goal>
+                                 </goals>
++                                <configuration>
++                                    <additionalparam>-Xdoclint:none</additionalparam>
++                                </configuration>
+                             </execution>
+                         </executions>
+                     </plugin>
 -- 
 2.8.2
 
