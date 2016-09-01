@@ -1,4 +1,4 @@
-From 91eb1321fd87b4cfeca50634f7f1764fd541bdd5 Mon Sep 17 00:00:00 2001
+From b20f10bbd603e36a742c51241f87a3dbecb87202 Mon Sep 17 00:00:00 2001
 From: Jamie Mansfield <dev@jamierocks.uk>
 Date: Thu, 1 Sep 2016 16:53:01 +0100
 Subject: [PATCH] Add command builder
@@ -6,10 +6,10 @@ Subject: [PATCH] Add command builder
 
 diff --git a/src/main/java/org/neptunepowered/lib/command/CommandBuilder.java b/src/main/java/org/neptunepowered/lib/command/CommandBuilder.java
 new file mode 100644
-index 0000000..cd11228
+index 0000000..c4f91a4
 --- /dev/null
 +++ b/src/main/java/org/neptunepowered/lib/command/CommandBuilder.java
-@@ -0,0 +1,115 @@
+@@ -0,0 +1,123 @@
 +/*
 + * This file is part of NeptuneLib, licensed under the MIT License (MIT).
 + *
@@ -42,6 +42,7 @@ index 0000000..cd11228
 +import net.canarymod.commandsys.CanaryCommand;
 +import net.canarymod.commandsys.CommandOwner;
 +import net.canarymod.commandsys.DynamicCommandAnnotation;
++import net.canarymod.commandsys.TabCompleteDispatch;
 +
 +/**
 + * A builder for creating commands.
@@ -55,6 +56,7 @@ index 0000000..cd11228
 +    private String description;
 +    private String toolTip;
 +    private CommandExecutor executor;
++    private TabCompleteDispatch tabComplete = null;
 +    private String[] permissions = new String[]{};
 +
 +    public CommandBuilder(CommandOwner owner) {
@@ -85,6 +87,12 @@ index 0000000..cd11228
 +        return this;
 +    }
 +
++    public CommandBuilder tabComplete(TabCompleteDispatch tabComplete) {
++        checkNotNull(tabComplete, "tabComplete is null!");
++        this.tabComplete = tabComplete;
++        return this;
++    }
++
 +    public CommandBuilder permissions(String... permissions) {
 +        checkNotNull(permissions, "permissions is null!");
 +        this.permissions = permissions;
@@ -112,10 +120,10 @@ index 0000000..cd11228
 +                        -1,               // max
 +                        "",               // tabCompleteMethod
 +                        1                 // version
-+                ),          // meta
-+                this.owner, // owner
-+                null,       // translator
-+                null        // tabComplete
++                ),               // meta
++                this.owner,      // owner
++                null,            // translator
++                this.tabComplete // tabComplete
 +        ) {
 +            @Override
 +            protected void execute(MessageReceiver caller, String[] parameters) {
