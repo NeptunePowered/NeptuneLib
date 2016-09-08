@@ -1,0 +1,35 @@
+From 1763caf8438e7149492a009393c91e3752043caf Mon Sep 17 00:00:00 2001
+From: Jamie Mansfield <dev@jamierocks.uk>
+Date: Thu, 8 Sep 2016 18:11:06 +0100
+Subject: [PATCH] Add fastutil
+
+
+diff --git a/pom.xml b/pom.xml
+index 51fab5a..08b8a90 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -138,9 +138,21 @@
+             <name>MCStats Repository</name>
+             <url>http://repo.mcstats.org/content/repositories/snapshots/</url>
+         </repository>
++        <!-- Neptune repositories -->
++        <repository>
++            <id>aikar</id>
++            <url>https://ci.emc.gs/nexus/content/groups/aikar/</url>
++        </repository>
+     </repositories>
+ 
+     <dependencies>
++        <!-- Neptune dependencies -->
++        <dependency>
++            <groupId>co.aikar</groupId>
++            <artifactId>fastutil-lite</artifactId>
++            <version>1.0</version>
++            <scope>provided</scope>
++        </dependency>
+         <!-- Compile Time Dependencies -->
+         <dependency>
+             <groupId>net.visualillusionsent</groupId>
+-- 
+2.8.2
+
