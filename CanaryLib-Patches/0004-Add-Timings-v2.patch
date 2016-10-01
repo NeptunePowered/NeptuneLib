@@ -1,4 +1,4 @@
-From 61864826f944fa064ebfc385ae3c2be65d1352ed Mon Sep 17 00:00:00 2001
+From b09149644345773d3bffeca2a2cdee3fc18c4c00 Mon Sep 17 00:00:00 2001
 From: Jamie Mansfield <dev@jamierocks.uk>
 Date: Fri, 30 Sep 2016 21:44:56 +0100
 Subject: [PATCH] Add Timings v2
@@ -454,10 +454,10 @@ index 599f4e2..559d5a3 100644
       *
 diff --git a/src/main/java/org/neptunepowered/lib/config/TimingsConfiguration.java b/src/main/java/org/neptunepowered/lib/config/TimingsConfiguration.java
 new file mode 100644
-index 0000000..7a978d3
+index 0000000..d07f2c1
 --- /dev/null
 +++ b/src/main/java/org/neptunepowered/lib/config/TimingsConfiguration.java
-@@ -0,0 +1,88 @@
+@@ -0,0 +1,89 @@
 +/*
 + * This file is part of NeptuneLib, licensed under the MIT License (MIT).
 + *
@@ -527,6 +527,7 @@ index 0000000..7a978d3
 +        this.cfg.getBoolean("enabled", true);
 +        this.cfg.getInt("history-interval", 300);
 +        this.cfg.getInt("history-length", 3600);
++        this.cfg.save();
 +    }
 +
 +    public boolean isVerbose() {
