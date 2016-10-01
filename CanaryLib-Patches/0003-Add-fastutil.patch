@@ -1,11 +1,11 @@
-From 1763caf8438e7149492a009393c91e3752043caf Mon Sep 17 00:00:00 2001
+From 95771cced8e4826fe54f50615b6f08d88831d940 Mon Sep 17 00:00:00 2001
 From: Jamie Mansfield <dev@jamierocks.uk>
 Date: Thu, 8 Sep 2016 18:11:06 +0100
 Subject: [PATCH] Add fastutil
 
 
 diff --git a/pom.xml b/pom.xml
-index 51fab5a..08b8a90 100644
+index 51fab5a..373503f 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -138,9 +138,21 @@
@@ -15,7 +15,7 @@ index 51fab5a..08b8a90 100644
 +        <!-- Neptune repositories -->
 +        <repository>
 +            <id>aikar</id>
-+            <url>https://ci.emc.gs/nexus/content/groups/aikar/</url>
++            <url>https://ci.emc.gs/nexus/content/repositories/aikar/</url>
 +        </repository>
      </repositories>
  
