@@ -1,11 +1,38 @@
-From 8f2585f8dc8368589a1d08ab9d55150851512fd9 Mon Sep 17 00:00:00 2001
+From 17267b4be45450a8715603934743955488de613c Mon Sep 17 00:00:00 2001
 From: Jamie Mansfield <dev@jamierocks.uk>
 Date: Sun, 2 Oct 2016 02:54:47 +0100
 Subject: [PATCH] Configuration Changes
 
 
+diff --git a/src/main/java/net/canarymod/config/DatabaseConfiguration.java b/src/main/java/net/canarymod/config/DatabaseConfiguration.java
+index 262a1c8..56d9c4f 100644
+--- a/src/main/java/net/canarymod/config/DatabaseConfiguration.java
++++ b/src/main/java/net/canarymod/config/DatabaseConfiguration.java
+@@ -1,11 +1,11 @@
+ package net.canarymod.config;
+ 
++import static net.canarymod.Canary.log;
++
+ import net.visualillusionsent.utils.PropertiesFile;
+ 
+ import java.io.File;
+ 
+-import static net.canarymod.Canary.log;
+-
+ /**
+  * Database Configuration settings
+  *
+@@ -19,7 +19,7 @@ public class DatabaseConfiguration implements ConfigurationContainer {
+         File test = new File(path);
+ 
+         if (!test.exists()) {
+-            log.info("Could not find the database configuration at " + path + ", creating default.");
++            log.warn("Could not find the database configuration at " + path + ", creating default.");
+         }
+         this.cfg = new PropertiesFile(path);
+         verifyConfig();
 diff --git a/src/main/java/net/canarymod/config/ServerConfiguration.java b/src/main/java/net/canarymod/config/ServerConfiguration.java
-index fc70354..b0ac216 100644
+index fc70354..aa64647 100644
 --- a/src/main/java/net/canarymod/config/ServerConfiguration.java
 +++ b/src/main/java/net/canarymod/config/ServerConfiguration.java
 @@ -1,13 +1,13 @@
@@ -24,6 +51,15 @@ index fc70354..b0ac216 100644
  /**
   * Server Configuration Container
   *
+@@ -23,7 +23,7 @@ public class ServerConfiguration implements ConfigurationContainer {
+         File test = new File(path);
+ 
+         if (!test.exists()) {
+-            log.info("Could not find the server configuration at " + path + ", creating default.");
++            log.warn("Could not find the server configuration at " + path + ", creating default.");
+         }
+         this.cfg = new PropertiesFile("config" + File.separatorChar + "server.cfg");
+ 
 @@ -113,7 +113,7 @@ public class ServerConfiguration implements ConfigurationContainer {
          cfg.setComments("max-players", "The maximum allowed players online (Does not count ReserveList users connecting after server is full)");
          cfg.getInt("max-tick-time", 60000);
@@ -33,6 +69,49 @@ index fc70354..b0ac216 100644
          cfg.setComments("motd", "The Server list Message of the Day");
          cfg.getInt("network-compression-threshold", 256);
          cfg.setComments("network-compression-threshold", "By default it allows packets that are n-1 bytes big to go normally, but a packet that n bytes or more will be compressed down.");
+diff --git a/src/main/java/net/canarymod/config/WorldConfiguration.java b/src/main/java/net/canarymod/config/WorldConfiguration.java
+index 60d2cb7..b7c5b71 100644
+--- a/src/main/java/net/canarymod/config/WorldConfiguration.java
++++ b/src/main/java/net/canarymod/config/WorldConfiguration.java
+@@ -1,5 +1,7 @@
+ package net.canarymod.config;
+ 
++import static net.canarymod.Canary.log;
++
+ import net.canarymod.MathHelp;
+ import net.canarymod.api.GameMode;
+ import net.canarymod.api.world.DimensionType;
+@@ -13,8 +15,6 @@ import java.util.HashMap;
+ import java.util.HashSet;
+ import java.util.Set;
+ 
+-import static net.canarymod.Canary.log;
+-
+ /**
+  * @author Jason (darkdiplomat)
+  * @author Jos Kuijpers
+@@ -44,7 +44,7 @@ public class WorldConfiguration implements ConfigurationContainer {
+         File test = new File(path);
+ 
+         if (!test.exists()) {
+-            log.info("Could not find the world configuration for " + worldname + " at " + path + ", creating default.");
++            log.warn("Could not find the world configuration for " + worldname + " at " + path + ", creating default.");
+         }
+         cfg = new PropertiesFile(path + File.separatorChar + worldname + ".cfg");
+         verifyConfig();
+diff --git a/src/main/java/org/neptunepowered/lib/config/TimingsConfiguration.java b/src/main/java/org/neptunepowered/lib/config/TimingsConfiguration.java
+index d07f2c1..9e4b186 100644
+--- a/src/main/java/org/neptunepowered/lib/config/TimingsConfiguration.java
++++ b/src/main/java/org/neptunepowered/lib/config/TimingsConfiguration.java
+@@ -44,7 +44,7 @@ public class TimingsConfiguration implements ConfigurationContainer {
+         File test = new File(path);
+ 
+         if (!test.exists()) {
+-            log.info("Could not find the timings configuration at " + path + ", creating default.");
++            log.warn("Could not find the timings configuration at " + path + ", creating default.");
+         }
+         this.cfg = new PropertiesFile(path);
+         verifyConfig();
 -- 
 2.10.0
 
