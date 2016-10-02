@@ -1,0 +1,38 @@
+From 8f2585f8dc8368589a1d08ab9d55150851512fd9 Mon Sep 17 00:00:00 2001
+From: Jamie Mansfield <dev@jamierocks.uk>
+Date: Sun, 2 Oct 2016 02:54:47 +0100
+Subject: [PATCH] Configuration Changes
+
+
+diff --git a/src/main/java/net/canarymod/config/ServerConfiguration.java b/src/main/java/net/canarymod/config/ServerConfiguration.java
+index fc70354..b0ac216 100644
+--- a/src/main/java/net/canarymod/config/ServerConfiguration.java
++++ b/src/main/java/net/canarymod/config/ServerConfiguration.java
+@@ -1,13 +1,13 @@
+ package net.canarymod.config;
+ 
++import static net.canarymod.Canary.log;
++
+ import net.visualillusionsent.utils.BooleanUtils;
+ import net.visualillusionsent.utils.PropertiesFile;
+ import org.apache.logging.log4j.Level;
+ 
+ import java.io.File;
+ 
+-import static net.canarymod.Canary.log;
+-
+ /**
+  * Server Configuration Container
+  *
+@@ -113,7 +113,7 @@ public class ServerConfiguration implements ConfigurationContainer {
+         cfg.setComments("max-players", "The maximum allowed players online (Does not count ReserveList users connecting after server is full)");
+         cfg.getInt("max-tick-time", 60000);
+         cfg.setComments("max-tick-time", "The maximum number of milliseconds a single tick may take before the server watchdog stops the server. Setting to -1 disables WatchDog.");
+-        cfg.getString("motd", "CanaryMod Minecraft Server");
++        cfg.getString("motd", "NeptuneVanilla Minecraft Server");
+         cfg.setComments("motd", "The Server list Message of the Day");
+         cfg.getInt("network-compression-threshold", 256);
+         cfg.setComments("network-compression-threshold", "By default it allows packets that are n-1 bytes big to go normally, but a packet that n bytes or more will be compressed down.");
+-- 
+2.10.0
+
