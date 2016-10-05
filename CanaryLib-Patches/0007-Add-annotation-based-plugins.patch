@@ -1,9 +1,21 @@
-From 70341efc3b8e268a160179c40c7fed8ff279fc57 Mon Sep 17 00:00:00 2001
+From f3da9583b9c7dc93c065867f4ae9dcaa9a20860a Mon Sep 17 00:00:00 2001
 From: Jamie Mansfield <dev@jamierocks.uk>
 Date: Wed, 5 Oct 2016 20:19:35 +0100
 Subject: [PATCH] Add annotation-based plugins
 
 
+diff --git a/pom.xml b/pom.xml
+index 373503f..56822c4 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -238,6 +238,7 @@
+                 <configuration>
+                     <source>1.8</source>
+                     <target>1.8</target>
++                    <compilerArgument>-proc:none</compilerArgument>
+                 </configuration>
+                 <executions>
+                     <execution>
 diff --git a/src/main/java/org/neptunepowered/lib/plugin/Plugin.java b/src/main/java/org/neptunepowered/lib/plugin/Plugin.java
 new file mode 100644
 index 0000000..e638c1b
