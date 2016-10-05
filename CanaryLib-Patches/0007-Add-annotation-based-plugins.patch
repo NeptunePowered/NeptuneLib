@@ -1,4 +1,4 @@
-From f3da9583b9c7dc93c065867f4ae9dcaa9a20860a Mon Sep 17 00:00:00 2001
+From 4f7383a43a67caec481d7934c85bc756d1ebea54 Mon Sep 17 00:00:00 2001
 From: Jamie Mansfield <dev@jamierocks.uk>
 Date: Wed, 5 Oct 2016 20:19:35 +0100
 Subject: [PATCH] Add annotation-based plugins
@@ -18,10 +18,10 @@ index 373503f..56822c4 100644
                      <execution>
 diff --git a/src/main/java/org/neptunepowered/lib/plugin/Plugin.java b/src/main/java/org/neptunepowered/lib/plugin/Plugin.java
 new file mode 100644
-index 0000000..e638c1b
+index 0000000..cd8cef9
 --- /dev/null
 +++ b/src/main/java/org/neptunepowered/lib/plugin/Plugin.java
-@@ -0,0 +1,60 @@
+@@ -0,0 +1,74 @@
 +/*
 + * This file is part of NeptuneLib, licensed under the MIT License (MIT).
 + *
@@ -75,6 +75,20 @@ index 0000000..e638c1b
 +    String author() default "";
 +
 +    /**
++     * Gets the language of the plugin.
++     *
++     * @return The plugin language
++     */
++    String language() default "java";
++
++    /**
++     * Gets if the plugin should be enabled early.
++     *
++     * @return {@code True} if the plugin should be enabled early, {@code false} otherwise
++     */
++    boolean enableEarly() default false;
++
++    /**
 +     * Gets the dependencies for the plugin.
 +     *
 +     * @return The plugin dependencies
@@ -84,10 +98,10 @@ index 0000000..e638c1b
 +}
 diff --git a/src/main/java/org/neptunepowered/lib/plugin/processor/PluginProcessor.java b/src/main/java/org/neptunepowered/lib/plugin/processor/PluginProcessor.java
 new file mode 100644
-index 0000000..cc0149a
+index 0000000..751326b
 --- /dev/null
 +++ b/src/main/java/org/neptunepowered/lib/plugin/processor/PluginProcessor.java
-@@ -0,0 +1,111 @@
+@@ -0,0 +1,132 @@
 +/*
 + * This file is part of NeptuneLib, licensed under the MIT License (MIT).
 + *
@@ -124,8 +138,6 @@ index 0000000..cc0149a
 +import java.util.Set;
 +
 +import javax.annotation.processing.AbstractProcessor;
-+import javax.annotation.processing.Messager;
-+import javax.annotation.processing.ProcessingEnvironment;
 +import javax.annotation.processing.RoundEnvironment;
 +import javax.annotation.processing.SupportedAnnotationTypes;
 +import javax.annotation.processing.SupportedSourceVersion;
@@ -139,21 +151,12 @@ index 0000000..cc0149a
 +@SupportedSourceVersion(SourceVersion.RELEASE_8)
 +public class PluginProcessor extends AbstractProcessor {
 +
-+    private Messager messager;
-+
-+    @Override
-+    public synchronized void init(ProcessingEnvironment processingEnv) {
-+        super.init(processingEnv);
-+
-+        this.messager = processingEnv.getMessager();
-+    }
-+
 +    @Override
 +    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 +        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Plugin.class)) {
 +            if (annotatedElement.getKind() != ElementKind.CLASS) {
 +                this.error("Only classes can be annotated with @Plugin", annotatedElement);
-+                return false; // There should only be one Plugin annotation anyhow
++                return false;
 +            }
 +
 +            final TypeElement pluginElement = (TypeElement) annotatedElement;
@@ -175,6 +178,15 @@ index 0000000..cc0149a
 +            if (!plugin.author().isEmpty()) {
 +                props.setProperty("author", plugin.author());
 +            }
++            if (!plugin.language().isEmpty() && !plugin.language().equalsIgnoreCase("java")) {
++                props.setProperty("language", plugin.language());
++            }
++            if (plugin.enableEarly()) {
++                props.setProperty("enable-early", "true");
++            }
++            if (plugin.dependencies().length != 0) {
++                props.setProperty("dependencies", this.getDependencies(plugin.dependencies()));
++            }
 +
 +            try (BufferedWriter writer
 +                    = new BufferedWriter(this.processingEnv.getFiler().createResource(CLASS_OUTPUT, "", "Canary.inf").openWriter())) {
@@ -183,9 +195,32 @@ index 0000000..cc0149a
 +                e.printStackTrace();
 +                return false;
 +            }
++
++            // There should only ever be one Plugin
++            return true;
 +        }
 +
 +        return false;
++    }
++
++    /**
++     * Gets the dependency string for an array of dependencies.
++     *
++     * @param dependencies The dependency array
++     * @return The dependency string
++     */
++    private String getDependencies(String[] dependencies) {
++        final StringBuilder builder = new StringBuilder();
++
++        for (int i = 0; i <= dependencies.length; i++) {
++            builder.append(dependencies[i]);
++
++            if (i != dependencies.length) {
++                builder.append(",");
++            }
++        }
++
++        return builder.toString();
 +    }
 +
 +    /**
@@ -195,7 +230,7 @@ index 0000000..cc0149a
 +     * @param element The element
 +     */
 +    private void error(String message, Element element) {
-+        this.messager.printMessage(Diagnostic.Kind.ERROR, message, element);
++        this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, message, element);
 +    }
 +
 +}
